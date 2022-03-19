@@ -25,6 +25,12 @@ export class AuthService {
   async registerAccount(user: User): Promise<User> {
     try {
       let { firstName, lastName, email, password } = user;
+      let checkEmail=this.userRepository.findOne({
+        where:{
+          email
+        }
+      })
+      if(checkEmail) throw new ForbiddenException({error:"User with this email already exists"})
       password = await this.hashPassword(password);
       let newUser = await this.userRepository.save({
         firstName,

@@ -10,3 +10,6 @@ npm i -D @types/passport-jwt @types/bcrypt
 nest g mo auth
 nest g s auth/services/auth --no-spec --flat
 nest g gu auth/guards/jwt --no-spec --flat
+
+//using dto to validate user email and password while register
+npm i class-validator class-transformer
