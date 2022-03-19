@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { from, Observable } from 'rxjs';
+import { User } from 'src/auth/models/user.interface';
 
 @Injectable()
 export class FeedService {
@@ -19,6 +20,13 @@ export class FeedService {
   }
   async findAllPosts(): Promise<FeedPost[]> {
     return await this.feedPostRepository.find();
+  }
+  async findOnlyUserPosts(user:User): Promise<FeedPost[]> {
+    return await this.feedPostRepository.find({
+      where:{
+        author:user.id
+      }
+    });
   }
   async findPosts(take: number = 10, skip: number = 0): Promise<FeedPost[]> {
     try {

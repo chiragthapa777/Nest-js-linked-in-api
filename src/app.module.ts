@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FeedModule } from './feed/feed.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { FeedModule } from './feed/feed.module';
       database:process.env.POSTGRES_DATABASE,
       autoLoadEntities:true,
       synchronize:true,
-    }), FeedModule,//conecting typeorm and postgres
+    }), FeedModule, AuthModule,//conecting typeorm and postgres
   ],
   controllers: [AppController],
   providers: [AppService],
